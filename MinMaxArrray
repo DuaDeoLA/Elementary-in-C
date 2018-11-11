@@ -1,0 +1,44 @@
+/*
+This program find maximum & minimum value in array
+Code by Nguyen Phuc Duy
+Date: 12/11/2018
+*/
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int arraySize,maxItem,minItem,count,cnt;
+    maxItem=0;
+    minItem=0;
+    printf("Input Array size:");
+    scanf("%d",&arraySize);
+    int arrayNum [arraySize];
+    for (count =0;count<arraySize;count++)
+    {
+        printf("Item [%d]:",count);
+        scanf("%d",&arrayNum[count]);
+    }
+    for (count =0;count<arraySize;count++)
+    {
+        if(arrayNum[count]< minItem)
+        {
+            minItem=arrayNum[count];
+        }
+    }
+    for (cnt =0;cnt<arraySize;cnt++)
+    {
+        if(arrayNum[cnt]> maxItem)
+        {
+            maxItem=arrayNum[cnt];
+        }
+    }
+    printf("\n Array:");
+    for (count =0;count<arraySize;count++)
+    {
+        printf("%d",arrayNum[count]);
+    }
+    printf("\n Max item is: %d",maxItem);
+    printf("\n Min item is: %d",minItem);
+    return 0;
+}
