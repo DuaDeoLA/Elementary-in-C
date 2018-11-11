@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int stringLen,count,cnt;
+    int check=0;
+    printf("This program find vowel & consonant is string \n");
+    printf("Type length of the string: \n");
+    scanf("%d",&stringLen);
+    stringLen=stringLen+1;
+    char textArray[stringLen];
+    char vowelPanel[10] ={'U','E','O','A','I','u','e','o','a','i'};
+    printf("Type your text:");
+    scanf("%s",textArray);
+    printf("Vowel:");
+    for (count=0;count<stringLen-1;count++)
+    {
+        for (cnt=0;cnt<10;cnt++)
+        {
+            if(vowelPanel[cnt]==textArray[count])
+            {
+                check=1;
+            }
+        }
+        if (check==1)
+        {
+            printf("%c",textArray[count]);
+        }
+        check=0;
+    }
+    printf("\n Consonant:");
+    for (count=0;count<stringLen-1;count++)
+    {
+        for (cnt=0;cnt<10;cnt++)
+        {
+            if(vowelPanel[cnt]==textArray[count])
+            {
+                check=1;
+            }
+        }
+        if (check==0)
+        {
+            printf("%c",textArray[count]);
+        }
+        check=0;
+    }
+    return 0;
+}
