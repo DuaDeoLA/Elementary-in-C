@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int count,subcount,key;
+    char *textPtr,text[100];
+    printf("Type your string:");
+    scanf("%s",text);
+    textPtr=text;
+    subcount=strlen(text)-1;
+    key=0;
+    for (count=0;count<strlen(text);count++)
+    {
+        if(*(textPtr+count) != *(textPtr+subcount))
+        {
+            key=1;
+        }
+        --subcount;
+    }
+    if (key==1)
+    {
+        printf(" None Palindrome");
+    }
+    else
+    {
+        printf("Palindrome");
+    }
+    return 0;
+}
