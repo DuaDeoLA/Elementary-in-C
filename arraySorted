@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int *arrayMain,*arrayCopy,*arrayDouble;
+    int count,arraySize,temp,subcount;
+    /*Input array size */
+    printf("Size of array:");
+    scanf("%d",&arraySize);
+    /*Initialize array*/
+    arrayMain=(int*)malloc(arraySize*sizeof(int));
+    arrayCopy=(int*)malloc(arraySize*sizeof(int));
+    arrayDouble=(int*)malloc(arraySize*sizeof(int));
+    /*Input array*//*Backup array */
+    if (arrayMain!=NULL && arrayCopy!=NULL && arrayDouble!= NULL)
+    {
+        for (count=0;count<arraySize;count++)
+            {
+                printf("Element[%d]:",count);
+                scanf("%d",arrayMain+count);
+                *(arrayCopy+count)=*(arrayMain+count);
+            }
+    }
+    else
+    {
+        printf("Not enough memory!!");
+    }
+    /*Sorting array*/
+    printf("Sorting start....");
+    for (count=0;count<arraySize;count++)
+        {
+             for (subcount=count+1;subcount<arraySize;subcount++)
+             {
+                 if (*(arrayMain+count)>*(arrayMain+subcount))
+                 {
+                     temp=*(arrayMain+count);
+                     *(arrayMain+count)=*(arrayMain+subcount);
+                     *(arrayMain+subcount)=temp;
+                 }
+             }
+        }
+    /*Creat a new array*/
+    printf("Result: \n");
+    for (count=0;count<arraySize;count++)
+    {
+        printf("Element[%d]: %d \t",count,*(arrayCopy+count));
+    }
+    int numberodd=0;
+    for (count=0;count<arraySize;count++)
+    {
+        if  (*(arrayCopy+count) % 2==0)
+        {
+            *(arrayDouble+numberodd)=*(arrayCopy+count)**(arrayCopy+count);
+            numberodd=numberodd+1;
+        }
+    }
+    printf("\n ////////////New array////////////////// \n");
+    for (count=0;count<numberodd;count++)
+    {
+        printf("Element[%d]: %d \t",count,*(arrayDouble+count));
+    }
+    return 0;
+}
