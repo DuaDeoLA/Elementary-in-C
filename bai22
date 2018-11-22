@@ -1,0 +1,130 @@
+/*
+Chuong trinh quan li sinh vien
+
+*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+/*Khai bao bien global  */
+int soluong=0;
+struct sinhVien
+{
+    char hoTen[100];
+    char gioiTinh[5];
+    char queQuan[50];
+    char diaChi[100];
+    char namHoc[50];
+    char khoaHoc[100];
+    char xepLoai [20];
+    float diemTb;
+};
+int main()
+{
+    /*Khai báo biến phụ*/
+    int choice,count;
+    char addflag='y';
+    /* Khai báo mảng sinh viên */
+    struct sinhVien dsSinhvien[100];
+    /*Khai báo hàm sử dụng prototype */
+    void arrange(struct sinhVien dsSinhvien[100]);
+    void timTinh();
+    /*Khai bao chuong trinh*/
+    while (choice!=5) /*Choice is exit code number */
+    {
+        printf("\nChon tu Menu\n 1.Them sinh vien \n 2.In danh sach diem >7 \n 3.Sap xep danh sach \n 4.In danh sach sinh vien tinh \n5.Thoat\n\n Enter choice:");
+        scanf("%d",&choice);
+        switch (choice)
+        {
+        case 1:
+            addflag='y';
+            for (count=0;addflag=='y'||addflag=='Y';count++)
+            {
+                printf("-------Hoc sinh moi-----------\n");
+                fflush(stdin);
+                printf("Ho va ten:");
+                gets(dsSinhvien[count].hoTen);
+                fflush(stdin);
+                printf("Gioi tinh:[Nam/Nu]:");
+                gets(dsSinhvien[count].gioiTinh);
+                printf("Que quan:");
+                gets(dsSinhvien[count].queQuan);
+                printf("Dia chi:");
+                gets(dsSinhvien[count].diaChi);
+                printf("Nam hoc:");
+                gets(dsSinhvien[count].namHoc);
+                printf("Khoa hoc:");
+                gets(dsSinhvien[count].khoaHoc);
+                printf("Diem:");
+                scanf("%f",&dsSinhvien[count].diemTb);
+                fflush(stdin);
+                printf("Xep loai:");
+                gets(dsSinhvien[count].xepLoai);
+                soluong=soluong+1;
+                printf("Tiep tuc nhap hay khong[Y/N] ? :  ");
+                scanf("%c",&addflag);
+            }
+            break;
+        case 2:
+            for (count=0;dsSinhvien[count].diemTb!=0;count++)
+            {
+                printf("\n STT \t Ho va ten \t\t Gioi \t Que quan \t Cho o \t Nam hoc \t Khoa hoc \t Ket qua \t Diem \t ");
+                if ( dsSinhvien[count].diemTb > 7.0 )
+                {
+                    printf("\n %d \t %s \t\t %s \t %s \t %s \t %s \t %s \t %s \t %-.2f \t ",count+1,dsSinhvien[count].hoTen,
+                    dsSinhvien[count].gioiTinh,dsSinhvien[count].queQuan,dsSinhvien[count].diaChi,dsSinhvien[count].namHoc,dsSinhvien[count].khoaHoc,dsSinhvien[count].xepLoai,dsSinhvien[count].diemTb);
+                }
+            }
+            break;
+        case 3:
+            arrange(dsSinhvien);
+            break;
+        case 4:
+            timTinh(dsSinhvien);
+            break;
+        }
+    }
+    return 0;
+}
+void arrange(struct sinhVien dsSinhvien[100])
+{
+    int count,subcount;
+    struct sinhVien tempSinhvien;
+    printf("So luong: %d",soluong);
+    for (count=0;count<soluong;count++)
+    {
+        for (subcount=count+1;subcount<soluong;subcount++)
+        {
+            if (dsSinhvien[count].diemTb>dsSinhvien[subcount].diemTb)
+            {
+                tempSinhvien=dsSinhvien[count];
+                dsSinhvien[count] =dsSinhvien[subcount];
+                dsSinhvien[subcount]=tempSinhvien;
+            }
+        }
+    }
+    printf("\n STT \t Ho va ten \t\t Gioi \t Que quan \t Cho o \t Nam hoc \t Khoa hoc \t Ket qua \t Diem \t ");
+    for (count=0;dsSinhvien[count].diemTb!=0;count++)
+    {
+        printf("\n %d \t %s \t\t %s \t %s \t %s \t %s \t %s \t %s \t %-.2f \t ",count+1,dsSinhvien[count].hoTen,
+        dsSinhvien[count].gioiTinh,dsSinhvien[count].queQuan,dsSinhvien[count].diaChi,dsSinhvien[count].namHoc,dsSinhvien[count].khoaHoc,dsSinhvien[count].xepLoai,dsSinhvien[count].diemTb);
+    }
+ return;
+}
+void timTinh(struct sinhVien dsSinhvien[100])
+{
+    int count;
+    char tenTinh[50];
+    fflush(stdin);
+    printf("Nhap ten tinh:");
+    gets(tenTinh);
+    printf("\n STT \t Ho va ten \t\t Gioi \t Que quan \t Cho o \t Nam hoc \t Khoa hoc \t Ket qua \t Diem \t ");
+    for (count=0;dsSinhvien[count].diemTb!=0;count++)
+            {
+                if ( strcmp(dsSinhvien[count].queQuan,tenTinh)==0)
+                {
+                    printf("\n %d \t %s \t\t %s \t %s \t %s \t %s \t %s \t %s \t %-.2f \t ",count+1,dsSinhvien[count].hoTen,
+                    dsSinhvien[count].gioiTinh,dsSinhvien[count].queQuan,dsSinhvien[count].diaChi,dsSinhvien[count].namHoc,dsSinhvien[count].khoaHoc,dsSinhvien[count].xepLoai,dsSinhvien[count].diemTb);
+                }
+            }
+    return;
+}
