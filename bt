@@ -1,0 +1,118 @@
+/* Thuc hanh
+Code by: Nguyen Phuc Duy
+Date: 23/11/2018
+*/
+#include <stdio.h>
+#include <stdlib.h>
+int initialize();
+void rose();
+void storeManager();
+/* Khai báo kiểu struct khohang*/
+typedef struct khoHangs
+{
+    char maHang[4];
+    char tenHang[100];
+    float donGia;
+    int soLuong;
+} khohang;
+int main()
+{
+    int choice;
+    do
+    {
+        choice=initialize();
+        switch (choice)
+        {
+            case 1:
+            rose();
+            break;
+            case 2:
+            storeManager();
+            break;
+        }
+    }
+    while (choice!=3);
+    return 0;
+}
+/*Hàm khởi tạo menu */
+int initialize()
+{
+    int choice;
+    printf("\n\n******************************\n");
+    printf("*Ho ten: Nguyen Phuc Duy     *\n");
+    printf("*Ngay sinh: 25/09/1993       *\n");
+    printf("*Ma so:                      *\n");
+    printf("*1. Tinh tien hoa hong       *\n");
+    printf("*2. Tinh gia tri cua kho hang*\n");
+    printf("*3. Thoat                    *\n");
+    printf("******************************\n");
+    printf("\n Choice:");
+    scanf("%d",&choice);
+    return choice;
+}
+/*Hàm tính hoa hồng */
+void rose()
+{
+    int doanhSo,hoaHong;
+    printf("\nNhap doanh so ban hang:");
+    scanf("%d",&doanhSo);
+    if (doanhSo<=5000)
+    {
+        hoaHong=0;
+    }
+        else if (doanhSo<=10000)
+        {
+           hoaHong=0.05*doanhSo;
+        }
+            else if (doanhSo<=15000)
+            {
+               hoaHong=0.1*doanhSo;
+            }
+                else if (doanhSo<=20000)
+                    {
+                       hoaHong=0.15*doanhSo;
+                    }
+                    else
+                        {
+                            hoaHong=0.2*doanhSo;
+                        }
+    printf("Hoa hong la: %d \n",hoaHong);
+}
+/*Hàm quản lí kho hàng */
+void storeManager()
+{
+    int count;
+    int soMH=0;
+    float giatriKH=0.0;
+    char addflag='y';
+    /*Tao mot kho hang moi */
+    khohang khoMoi[100];
+    for (count=0;count<100 && (addflag=='y'||addflag=='Y');++count)
+    {
+        printf("\nThem san pham thu: %d \n",count+1);
+        printf("\n Ma Hang: ");
+        fflush(stdin);
+        gets(khoMoi[count].maHang);
+        printf("\n Ten Hang: ");
+        fflush(stdin);
+        gets(khoMoi[count].tenHang);
+        printf("\n Do gia: ");
+        scanf("%f",&khoMoi[count].donGia);
+        printf("\n So luong: ");
+        scanf("%d",&khoMoi[count].soLuong);
+        fflush(stdin);
+        soMH=soMH+1;
+        printf("\n Tiep tuc nhap [Y/N]: ");
+        scanf("%c",&addflag);
+    }
+    /*In tong gia gia tri*/
+    printf("\nMa hang \t Ten hang \t Soluong \t Don gia \t Gia tri");
+    for (count=0;count<soMH;++count)
+    {
+        printf("\n %s \t %s \t %d \t %-.2f \t %-.2f",
+               khoMoi[count].maHang,khoMoi[count].tenHang,khoMoi[count].soLuong,khoMoi[count].donGia,khoMoi[count].donGia*khoMoi[count].soLuong);
+        giatriKH=giatriKH+ (khoMoi[count].donGia*khoMoi[count].soLuong);
+    }
+    printf("\nGia tri kho hang: %-.2f",giatriKH);
+}
+
