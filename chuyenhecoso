@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+int CoverToDecimal(int base,int number);
+int main()
+{
+    int number,base;
+    printf("\nNhap he:");
+    scanf("%d",&base);
+    printf("\nNhap so:");
+    scanf("%d",&number);
+    printf("\n Ket qua: %d",CoverToDecimal(base,number));
+    return 0;
+}
+int CoverToDecimal(int base,int number)
+{
+    int viTri=0,Decimal=0;
+    while (number!=0)
+    {
+        Decimal=Decimal+(number%10)*pow(base,viTri);
+        ++viTri;
+        number=number/10;
+    }
+    return Decimal;
+}
