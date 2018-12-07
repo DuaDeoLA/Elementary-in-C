@@ -1,0 +1,107 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+void ass2();
+void ass3();
+int ass1();
+int main()
+{
+    int choice;
+    do
+    {
+        choice=ass1();
+        switch (choice)
+        {
+            case 1:
+                system("cls");
+                ass2();
+                break;
+            case 2:
+                system("cls");
+                ass3();
+                break;
+        }
+    }
+    while (choice!=3);
+    return 0;
+}
+int ass1()
+{
+    int choice;
+   printf("\n\n**************************************************************\n");
+   printf("*   Ho ten: Nguyen Phuc Duy                                  *\n");
+   printf("*   Ngay sinh:                                               *\n");
+   printf("*   Ma so: A18082                                            *\n");
+   printf("*   1.Tao day so le                                          *\n");
+   printf("*   2.Nhap va tao chuoi moi                                  *\n");
+   printf("*   3.Thoat                                                  *\n");
+   printf("**************************************************************\n");
+   printf("\n\n Press your choice:  ");
+   scanf("%d",&choice);
+   return choice;
+}
+void ass2()
+{
+    printf("Nhap day so, so am de ung lai:");
+   int *array_ptn=(int*)malloc(10*sizeof(int));
+   int arraySize=0,number,i;
+   do
+   {
+       scanf("%d",&number);
+       if(number>-1)
+       {
+           array_ptn[arraySize]=number;
+            arraySize++;
+       }
+   }
+   while (number>-1);
+    printf("\nCurrent array:\n");
+   for (i=0;i<arraySize;i++)
+   {
+       printf("%d ",array_ptn[i]);
+   }
+   printf("\nOdd number:\n");
+   for (i=0;i<arraySize;i++)
+   {
+       if ((*(array_ptn+i)% 2)==0)
+       {
+            printf("%d ",array_ptn[i]);
+       }
+   }
+    printf("\nEven number:\n");
+   for (i=0;i<arraySize;i++)
+   {
+       if ((*(array_ptn+i)% 2)!=0)
+       {
+            printf("%d ",array_ptn[i]);
+       }
+   }
+}
+void ass3()
+{
+    /*Tạo string pointer*/
+    char *string_ptn;
+    int i,vovelCount=0,len=0;
+    float percent=0;
+    string_ptn=(char*)malloc(100*sizeof(char));
+    printf("\n Nhap chuoi:  ");
+    fflush(stdin);
+    gets(string_ptn);
+    /*Hiển thị chuổi*/
+    printf("\n Your string: %s",string_ptn);
+    for (i=0;i<strlen(string_ptn);++i)
+    {
+        if(string_ptn[i]=='u'||string_ptn[i]=='e'||string_ptn[i]=='o'||string_ptn[i]=='a'||string_ptn[i]=='i')
+        {
+           string_ptn[i]= toupper(string_ptn[i]);
+            ++vovelCount;
+        }
+         ++len;
+    }
+    percent=(float)vovelCount/len*100;
+    printf("\n Your vowel result: %s",string_ptn);
+    printf("\n Percent: %-.2f",percent);
+
+}
+
